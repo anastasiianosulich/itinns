@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="options-container">
+    <h1 class="title">Books</h1>
+    <div class="date-range-picker">
+      <app-date-range-picker-component
+        (dateRangeChanged)="handleDateRangeChange($event)"
+      ></app-date-range-picker-component>
+    </div>
+    <div class="search-block">
+      <mat-form-field>
+        <mat-label>Search by Title</mat-label>
+        <input
+          matInput
+          id="filterInput"
+          [(ngModel)]="filterText"
+          (input)="applyFilter()"
+        />
+      </mat-form-field>
+    </div>
+    <div class="sort-block">
+      <div class="sort-dropdown">
+        <mat-form-field>
+          <mat-label>Sort by:</mat-label>
+          <mat-select
+            [(ngModel)]="selectedSortOption"
+            (ngModelChange)="sortData(currentSortOrder)"
+          >
+            <mat-option *ngFor="let option of sortByOptions" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="sort-options">
+        <mat-button-toggle-group
+          (valueChange)="sortData(currentSortOrder)"
+          name="sortOrder"
+          [(ngModel)]="currentSortOrder"
+        >
+          <mat-button-toggle value="asc">asc</mat-button-toggle>
+          <mat-button-toggle value="desc">desc</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+    <div class="buttons-group">
+      <button class="btn" type="button" (click)="openChartModal()">
+        See 'Books by Year' Chart
+      </button>
+      <div class="export-block">
+        <select id="export-select" (change)="exportData()" class="dropdown">
+          <option value="null">Export</option>
+          <option value="excel">Export to Excel</option>
+          <option value="pdf">Export to PDF</option>
+        </select>
+      </div>
+
+      <button
+        class="btn add-btn"
+        type="button"
+        (click)="openAddBookModal(null)"
+      >
+        Add new book
+      </button>
+    </div>
+  </div>
+  <div>
+    <table id="books-table" *ngIf="processedBooks.length > 0">
+      <thead>
+        <tr>
+          <th *ngFor="let col of columns">{{ col }}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of processedBooks">
+          <td>{{ book.title }}</td>
+          <td>{{ book.description }}</td>
+          <td>{{ book.publicationDate | date : "mediumDate" }}</td>
+          <td>{{ book.pagesCount }}</td>
+
+          <td>
+            <button
+              type="button"
+              class="edit-book-btn"
+              (click)="openAddBookModal(book)"
+            >
+              Edit
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p *ngIf="processedBooks.length == 0" class="no-books">No books found</p>
+</div>

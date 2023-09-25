@@ -1,0 +1,15 @@
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: -25px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+.desc-ta {
+  resize: none;
+}

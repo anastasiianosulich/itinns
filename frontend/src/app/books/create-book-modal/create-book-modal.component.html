@@ -1,0 +1,66 @@
+<form [formGroup]="bookForm" (ngSubmit)="submit()">
+  <mat-dialog-content class="container">
+    <h4 class="mat-h4">{{ book ? "Update a Book" : "Add a New Book" }}</h4>
+    <mat-form-field class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+      <span
+        *ngIf="!bookForm.get('title')?.valid && bookForm.get('title')?.touched"
+        class="help-block"
+        >Value must be at least 3 symbols</span
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea
+        cols="10"
+        rows="5"
+        class="desc-ta"
+        matInput
+        formControlName="description"
+      ></textarea>
+      <span
+        *ngIf="
+          !bookForm.get('description')?.valid &&
+          bookForm.get('description')?.touched
+        "
+        class="help-block"
+        >Value must be at least 5 symbols</span
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Publication Date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="publicationDate"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <span
+        *ngIf="
+          !bookForm.get('publicationDate')?.valid &&
+          bookForm.get('publicationDate')?.touched
+        "
+        class="help-block"
+        >Value must be specified</span
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Pages Count</mat-label>
+      <input matInput type="number" formControlName="pagesCount" />
+      <span
+        *ngIf="
+          !bookForm.get('pagesCount')?.valid &&
+          bookForm.get('pagesCount')?.touched
+        "
+        class="help-block"
+        >Value must be greater/equal 1</span
+      >
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions class="modal-buttons">
+    <button type="button" class="btn" (click)="close()">Close</button>
+    <button type="submit" class="btn">{{ book ? "Update" : "Add" }}</button>
+  </mat-dialog-actions>
+</form>

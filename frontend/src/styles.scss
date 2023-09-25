@@ -1,0 +1,33 @@
+@import "ngx-toastr/toastr";
+@import "theme";
+
+$grey: rgb(174, 167, 167);
+$grey-hover: rgb(154, 146, 146);
+$grey-border: grey;
+$default-font-family: Roboto, "Helvetica Neue", sans-serif;
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: $default-font-family;
+}
+
+.btn {
+  width: 120px;
+  height: 50px;
+  padding: 10px;
+  background-color: $grey;
+  color: white;
+  font-size: 14px;
+  font-family: $default-font-family;
+  border: 1px $grey-border solid;
+  border-radius: 11px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $grey-hover;
+  }
+}

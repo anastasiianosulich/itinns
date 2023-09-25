@@ -1,0 +1,47 @@
+<div class="date-range-container">
+  <mat-form-field>
+    <mat-label>Start Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="startDatePicker"
+      (dateChange)="onDateSelected($event)"
+      [formControl]="startDate"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="startDatePicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #startDatePicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>End Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="endDatePicker"
+      (dateChange)="onDateSelected($event)"
+      [formControl]="endDate"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="endDatePicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #endDatePicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Select Date Range</mat-label>
+    <mat-select
+      [(ngModel)]="selectedOption"
+      (selectionChange)="onDateOptionChange()"
+    >
+      <mat-option value="disabled" disabled>Select an option</mat-option>
+      <mat-option value="currentMonth">Current Month</mat-option>
+      <mat-option value="currentYear">Current Year</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button class="btn" type="button" (click)="resetDatePickers()">
+    Reset Date Range
+  </button>
+</div>
